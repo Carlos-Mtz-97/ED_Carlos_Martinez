@@ -53,6 +53,8 @@ Rational::Rational(int num, int dem){
         numerator = num;
         denominator = dem;
     }
+    normalize();
+    
 }
 
 int Rational::getNumerator() const {
@@ -65,7 +67,6 @@ int Rational::getDenominator() const {
 
 std::string Rational::toString() const {
 	std::stringstream aux;
-
 	aux << numerator << "/" << denominator;
 	return aux.str();
 }
@@ -87,6 +88,18 @@ int gcd(int a, int b) {
 }
 
 void Rational::normalize() {
+  int aux;
+  if (numerator < denominator)
+    aux = denominator;
+  else
+    aux = numerator;
+
+  for (int i = aux; i > 0; i--){
+    if(numerator % i == 0 && denominator % i == 0){
+      numerator = numerator / i;
+      denominator =denominator / i;
+    }
+  }
 }
 
 void Rational::operator= (const Rational &right) {
