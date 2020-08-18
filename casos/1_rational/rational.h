@@ -53,16 +53,15 @@ Rational::Rational(int num, int dem){
         numerator = num;
         denominator = dem;
     }
-    normalize();
-    
+    normalize();    
 }
 
 int Rational::getNumerator() const {
-	return 0;
+	return numerator;
 }
 
 int Rational::getDenominator() const {
-	return 0;
+	return denominator;
 }
 
 std::string Rational::toString() const {
@@ -90,11 +89,14 @@ int gcd(int a, int b) {
 void Rational::normalize() {
   int aux = 0;
   int aux_sign = 1;
+  if (denominator == 0) {
+		throw RangeError();
+	}
   if (numerator < 0 || denominator < 0)
     aux_sign = -1;
   if (numerator < 0 && denominator < 0)
     aux_sign = 1;
-
+  
   aux = gcd(numerator,denominator);
   
   numerator = abs(numerator / aux) * aux_sign;
