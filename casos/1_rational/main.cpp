@@ -26,7 +26,6 @@ public:
 		std::cout << " PASSED\n Test 3...";
 
 		/* TEST 3 */
-
 		std::cout << "mi resultado" << Rational(2,4).toString().c_str() << "\n";
 		ASSERT_TRUE(!strcmp("1/2", Rational(2,4).toString().c_str()));
 		std::cout << " PASSED\n Test 4...";

@@ -88,18 +88,18 @@ int gcd(int a, int b) {
 }
 
 void Rational::normalize() {
-  int aux;
-  if (numerator < denominator)
-    aux = denominator;
-  else
-    aux = numerator;
+  int aux = 0;
+  int aux_sign = 1;
+  if (numerator < 0 || denominator < 0)
+    aux_sign = -1;
+  if (numerator < 0 && denominator < 0)
+    aux_sign = 1;
 
-  for (int i = aux; i > 0; i--){
-    if(numerator % i == 0 && denominator % i == 0){
-      numerator = numerator / i;
-      denominator =denominator / i;
-    }
-  }
+  aux = gcd(numerator,denominator);
+  
+  numerator = abs(numerator / aux) * aux_sign;
+  denominator = abs(denominator / aux);
+  
 }
 
 void Rational::operator= (const Rational &right) {
