@@ -29,7 +29,7 @@ public:
 	int getDenominator() const;
 	std::string toString() const;
 
-	Rational& operator=   (const Rational&);
+	void operator=   (const Rational&);
 	void operator+=  (const Rational&);
 
 	operator double () const;
@@ -99,13 +99,18 @@ void Rational::normalize() {
   
 }
 
-Rational& Rational::operator= (const Rational &right) {
+void Rational::operator= (const Rational &right) {
   numerator = right.numerator;
   denominator = right.denominator;
-  return *this; 
 }
 
 void Rational::operator+= (const Rational &right) {
+  Rational temp;
+  int aux;
+  aux = gcd(denominator, right.denominator);
+  numerator = numerator * (aux / denominator) + right.numerator * (aux / right.denominator);
+  denominator = aux;
+  normalize();
 }
 
 Rational operator+ (const Rational &left, const Rational &right) {
