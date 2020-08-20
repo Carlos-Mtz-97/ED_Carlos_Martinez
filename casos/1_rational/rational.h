@@ -66,7 +66,7 @@ std::string Rational::toString() const {
 }
 
 Rational::operator double () const {
-	return 0.0;
+	return numerator / (double)denominator;
 }
 
 //Greatest common divisor
