@@ -105,9 +105,8 @@ void Rational::operator= (const Rational &right) {
 }
 
 void Rational::operator+= (const Rational &right) {
-  Rational temp;
   int aux;
-  aux = gcd(denominator, right.denominator);
+  aux = denominator * right.denominator;
   numerator = numerator * (aux / denominator) + right.numerator * (aux / right.denominator);
   denominator = aux;
   normalize();
