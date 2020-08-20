@@ -113,7 +113,12 @@ void Rational::operator+= (const Rational &right) {
 }
 
 Rational operator+ (const Rational &left, const Rational &right) {
-	return Rational();
+  int num = 0;
+  int dem = 0;
+  dem = left.getDenominator() * right.getDenominator();
+  num = left.getNumerator() * (dem / left.getDenominator()) + right.getNumerator() * (dem / right.getDenominator());
+
+  return Rational(num,dem);
 }
 
 Rational operator- (const Rational &left, const Rational &right) {
@@ -121,7 +126,8 @@ Rational operator- (const Rational &left, const Rational &right) {
 }
 
 Rational operator- (const Rational &right) {
-	return Rational();
+  int num = right.getNumerator() * -1;
+	return Rational(num, right.getDenominator());
 }
 
 bool operator== (const Rational &left, const Rational &right) {
