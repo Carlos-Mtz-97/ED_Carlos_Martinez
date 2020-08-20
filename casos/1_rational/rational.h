@@ -122,7 +122,12 @@ Rational operator+ (const Rational &left, const Rational &right) {
 }
 
 Rational operator- (const Rational &left, const Rational &right) {
-	return Rational();
+	int num = 0;
+  int dem = 0;
+  dem = left.getDenominator() * right.getDenominator();
+  num = left.getNumerator() * (dem / left.getDenominator()) - right.getNumerator() * (dem / right.getDenominator());
+
+  return Rational(num,dem);
 }
 
 Rational operator- (const Rational &right) {
@@ -131,11 +136,23 @@ Rational operator- (const Rational &right) {
 }
 
 bool operator== (const Rational &left, const Rational &right) {
-	return false;
+  int aux1;
+  int aux2;
+
+  aux1 = left.getNumerator() * right.getDenominator();
+  aux2 = left.getDenominator() * right.getNumerator();
+
+  if(aux1 == aux2){
+	  return true;
+  }  
+  return false;
 }
 
 bool operator<  (const Rational &left, const Rational &right) {
-	return false;
+  if((double)left < (double)right){
+	  return true;
+  }
+  return false;
 }
 
 #endif /* RATIONAL_H_ */
