@@ -45,15 +45,10 @@ Rational::Rational(int num){
     denominator = 1;
 }
 
-Rational::Rational(int num, int dem){
-    if (dem == 0){
-        numerator = 0;
-        denominator = 1;
-    }else{
-        numerator = num;
-        denominator = dem;
-    }
-    normalize();    
+Rational::Rational(int num, int dem){  
+  numerator = num;
+  denominator = dem;
+  normalize();    
 }
 
 int Rational::getNumerator() const {
