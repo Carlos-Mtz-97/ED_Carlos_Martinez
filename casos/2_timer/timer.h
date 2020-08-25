@@ -31,6 +31,16 @@ public:
 Timer::Timer() : hours(0), minutes(0) {}
 
 Timer::Timer(int hh, int mm) {
+  hours = hh;
+  minutes = mm;
+  while (minutes > 59){
+    hours += 1;
+    if (hours == 25){
+      hours = 1;
+    }
+    minutes -= 60;
+  }
+  
 }
 
 Timer::Timer(const Timer &t) {}
