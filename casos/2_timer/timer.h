@@ -46,9 +46,11 @@ Timer::Timer(int hh, int mm) {
 Timer::Timer(const Timer &t) {}
 
 int Timer::getHours() const {
+  return hours;
 }
 
 int Timer::getMinutes() const {
+  return minutes;
 }
 
 std::string Timer::toString() const {
@@ -66,9 +68,15 @@ std::string Timer::toString() const {
 }
 
 void Timer::operator= (const Timer &right) {
+  hours = right.getHours();
+  minutes = right.getMinutes();
 }
 
 void Timer::operator+= (const Timer &right) {
+  int aux;
+  aux = minutes + right.minutes;
+	minutes = aux % 60;
+	hours = (hours + right.hours + (aux / 60)) % 24;
 }
 
 bool operator== (const Timer &left, const Timer &right) {
