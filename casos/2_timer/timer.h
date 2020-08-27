@@ -80,9 +80,25 @@ void Timer::operator+= (const Timer &right) {
 }
 
 bool operator== (const Timer &left, const Timer &right) {
+  if (left.getHours() == right.getHours() && left.getMinutes() == right.getMinutes()){
+    return true;
+  }
+  return false;
 }
 
 bool operator> (const Timer &left, const Timer &right) {
+  if(left.getHours() >= right.getHours()){
+    if(left.getMinutes() > right.getMinutes()){
+      return true;
+    }
+    else if (left.getMinutes() < right.getMinutes() && left.getHours() > right.getHours()){
+      return true;
+    }
+    else if (left.getMinutes() >= right.getMinutes() && left.getHours() > right.getHours()){
+      return true;
+    }
+  }
+  return false;
 }
 
 #endif /* TIMER_H_ */
