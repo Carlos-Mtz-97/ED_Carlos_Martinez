@@ -83,6 +83,28 @@ unsigned int Vector<T>::resize(unsigned int newSize) throw (RangeError, OutOfMem
 	if (newSize == 0){
     throw RangeError();
   }
+
+  // Crear nuevo vector temporal
+  T *newData = new int[newSize];
+
+  if(newData == 0){
+		throw OutOfMemory();
+  }
+
+  // Copiar los valores del vector actual al temporal
+  unsigned int limit = newSize;
+  if (newSize >= size){
+    limit = size;
+  }
+  for(unsigned int i = 0; i < limit; i++){
+   newData[i] = data[i];
+  } 
+
+  // Borrar datos de vector actual
+  delete [] data;
+
+  data = newData;
+  size = newSize;
   return 0;
 }
 
@@ -91,7 +113,31 @@ unsigned int Vector<T>::resize(unsigned int newSize, T &initValue) throw (RangeE
   if (newSize == 0){
     throw RangeError();
   }
-	return 0;
+
+  // Crear nuevo vector temporal
+  T *newData = new int[newSize];
+
+  if(newData == 0){
+		throw OutOfMemory();
+  }
+
+  // Copiar los valores del vector actual al temporal
+  unsigned int i;
+  for(i = 0; i < size; i++){
+    newData[i] = data[i];
+  } 
+  if (newSize > size){
+    for(i = size; i < newSize ; i++ ){
+      newData[i] = initValue;
+    }
+  } 
+
+  // Borrar datos de vector actual
+  delete [] data;
+
+  data = newData;
+  size = newSize;
+  return 0;
 }
 
 template <class T>
