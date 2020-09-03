@@ -154,7 +154,10 @@ std::string Vector<T>::toString() const {
 
 template <class T>
 T& Vector<T>::operator[] (unsigned int index) const throw (IndexOutOfBounds) {
-	return data[0];
+  if (index < 0 || index >= size) {
+		throw IndexOutOfBounds();
+	}
+	return data[index];
 }
 
 template <class T>
