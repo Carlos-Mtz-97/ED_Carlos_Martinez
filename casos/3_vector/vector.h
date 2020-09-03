@@ -162,6 +162,12 @@ T& Vector<T>::operator[] (unsigned int index) const throw (IndexOutOfBounds) {
 
 template <class T>
 void Vector<T>::operator=(const Vector<T> &right) {
+	if (size != right.size) {
+	  resize(right.size);
+	}
+	for (unsigned int i = 0; i < right.size; i++) {
+		data[i] = right.data[i];
+	}
 }
 
 #endif /* VECTOR_H_ */
