@@ -69,7 +69,7 @@ Vector<T>::Vector(const Vector<T> &source) throw (OutOfMemory) {
 template <class T>
 Vector<T>::~Vector() {
 	delete [] data;
-	data = 0;
+	data = NULL;
 	size = 0;
 }
 
@@ -80,11 +80,17 @@ unsigned int Vector<T>::length() const {
 
 template <class T>
 unsigned int Vector<T>::resize(unsigned int newSize) throw (RangeError, OutOfMemory) {
-	return 0;
+	if (newSize == 0){
+    throw RangeError();
+  }
+  return 0;
 }
 
 template <class T>
 unsigned int Vector<T>::resize(unsigned int newSize, T &initValue) throw (RangeError, OutOfMemory) {
+  if (newSize == 0){
+    throw RangeError();
+  }
 	return 0;
 }
 
