@@ -30,13 +30,22 @@ private:
 };
 
 template <class T>
-Link<T>::Link(T val) {}
+Link<T>::Link(T val) {
+  value = val;
+  next = NULL;
+}
 
 template <class T>
-Link<T>::Link(T val, Link* nxt) {}
+Link<T>::Link(T val, Link* nxt) {
+  value = val;
+  next = nxt;
+}
 
 template <class T>
-Link<T>::Link(const Link<T> &source) {}
+Link<T>::Link(const Link<T> &source) {
+  value = source.val;
+  next = source.next;
+}
 
 template <class T>
 class List {
@@ -76,20 +85,29 @@ private:
 };
 
 template <class T>
-List<T>::List(){}
+List<T>::List(){
+  head = NULL;
+  size = 0;
+}
 
 template <class T>
 List<T>::~List() {
+  clear();
+  head = NULL;
+  size = 0;
 }
 
 template <class T>
 bool List<T>::empty() const {
+  if (head == NULL){
+    return true;
+  }
 	return false;
 }
 
 template <class T>
 int List<T>::length() const {
-	return 0;
+	return size;
 }
 
 template <class T>
@@ -104,6 +122,11 @@ T List<T>::getFirst() const throw (NoSuchElement) {
 
 template <class T>
 void List<T>::addFirst(T val) throw (OutOfMemory) {
+  Link<T> *nuevo = new Link<T>(val);
+	
+	nuevo->next = head;
+	head = nuevo;
+	size++;
 }
 
 template <class T>
