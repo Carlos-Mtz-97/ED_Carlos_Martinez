@@ -85,7 +85,10 @@ private:
 };
 
 template <class T>
-List<T>::List(){}
+List<T>::List(){
+  head = NULL;
+  size = 0; 
+}
 
 template <class T>
 List<T>::~List() {
