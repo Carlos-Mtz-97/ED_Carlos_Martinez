@@ -92,10 +92,16 @@ List<T>::List(){
 
 template <class T>
 List<T>::~List() {
+  clear();
+  head = NULL;
+  size = 0;
 }
 
 template <class T>
 bool List<T>::empty() const {
+  if(head == NULL) {
+    return true;
+  }
 	return false;
 }
 
