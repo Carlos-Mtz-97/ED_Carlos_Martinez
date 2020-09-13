@@ -124,7 +124,7 @@ template <class T>
 void List<T>::addFirst(T val) throw (OutOfMemory) {
   //Crear nuevo nodo con el valor de val
   Link<T> * nuevo = new Link<T>(val);
-  if (newLink == 0) {
+  if (nuevo == NULL) {
 		throw OutOfMemory();
 	}
 
@@ -140,6 +140,24 @@ void List<T>::addFirst(T val) throw (OutOfMemory) {
 
 template <class T>
 void List<T>::add(T val) throw (OutOfMemory) {
+  //Crear nuevo nodo
+  Link<T> * nuevo = new Link<T>(val);
+  if (nuevo == NULL) {
+		throw OutOfMemory();
+	}
+  // Crear apuntador actual
+  Link<T> * actual = head;
+
+  //Recorrer Lista
+  while (actual->next != NULL) { 
+    actual = actual->next;
+  }
+
+  //Apuntar actual a nuevo nodo
+  actual->next = nuevo;
+
+  //Incrementar tamaño
+  size++;
 }
 
 template <class T>
