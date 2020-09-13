@@ -107,20 +107,7 @@ bool List<T>::empty() const {
 
 template <class T>
 int List<T>::length() const {
-  
-  int i = 0;
-  //Crear apuntador a nodo
-  Link<T> * apuntador = head;
-  while (apuntador -> next != NULL) {
-    apuntador = apuntador ->next;
-    i++;
-  }
-  return i;
-
-  //Alternativa
-  
   return size;
-
 }
 
 template <class T>
