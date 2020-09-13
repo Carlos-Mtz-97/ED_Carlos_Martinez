@@ -85,29 +85,20 @@ private:
 };
 
 template <class T>
-List<T>::List(){
-  head = NULL;
-  size = 0;
-}
+List<T>::List(){}
 
 template <class T>
 List<T>::~List() {
-  clear();
-  head = NULL;
-  size = 0;
 }
 
 template <class T>
 bool List<T>::empty() const {
-  if (head == NULL){
-    return true;
-  }
 	return false;
 }
 
 template <class T>
 int List<T>::length() const {
-	return size;
+	return 0;
 }
 
 template <class T>
@@ -122,11 +113,6 @@ T List<T>::getFirst() const throw (NoSuchElement) {
 
 template <class T>
 void List<T>::addFirst(T val) throw (OutOfMemory) {
-  Link<T> *nuevo = new Link<T>(val);
-	
-	nuevo->next = head;
-	head = nuevo;
-	size++;
 }
 
 template <class T>
