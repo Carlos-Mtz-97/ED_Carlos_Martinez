@@ -122,6 +122,20 @@ T List<T>::getFirst() const throw (NoSuchElement) {
 
 template <class T>
 void List<T>::addFirst(T val) throw (OutOfMemory) {
+  //Crear nuevo nodo con el valor de val
+  Link<T> * nuevo = new Link<T>(val);
+  if (newLink == 0) {
+		throw OutOfMemory();
+	}
+
+  //Apuntar al siguiente del nuevo nodo a head
+  nuevo->next = head;
+
+  //Head apuntarlo al nuevo nodo 
+  head = nuevo;
+  
+  //Incrementar el tamaño
+  size++;
 }
 
 template <class T>
