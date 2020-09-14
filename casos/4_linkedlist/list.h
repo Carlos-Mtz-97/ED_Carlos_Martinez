@@ -144,7 +144,7 @@ void List<T>::add(T val) throw (OutOfMemory) {
   if (empty()){
     addFirst(val);
   }
-  
+
   //Crear nuevo nodo
   Link<T> * nuevo = new Link<T>(val);
   if (nuevo == NULL) {
@@ -200,6 +200,47 @@ std::string List<T>::toString() const {
 
 template <class T>
 List<T>::List(const List<T> &source) throw (OutOfMemory) {
+  /*
+  head = NULL;
+  size = 0;
+  //Si la lista esta vacia
+  if(source.empty()){
+    return;
+  }
+
+  //Recorrer la lista source
+  Link<T> * actual = source.head;
+
+  while(actual != NULL){
+    //Por cada nodo que se visita, crear un nuevo nodo al final
+    add(actual->value);
+    actual = actual->next;
+  }
+  */
+  	Link<T> *p, *q;
+
+	if (source.empty()) {
+		size = 0;
+		head = 0;
+	} else {
+		p = source.head;
+		head = new Link<T>(p->value);
+		if (head == 0) {
+			throw OutOfMemory();
+		}
+		q = head;
+
+		p = p->next;
+		while(p != 0) {
+			q->next = new Link<T>(p->value);
+			if (q->next == 0) {
+				throw OutOfMemory();
+			}
+			p = p->next;
+			q = q->next;
+		}
+		size = source.size;
+	}
 }
 
 template <class T>
