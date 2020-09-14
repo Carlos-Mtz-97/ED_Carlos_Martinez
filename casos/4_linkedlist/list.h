@@ -1,3 +1,5 @@
+
+
 /*
  * linkedlist.h
  *
@@ -143,6 +145,7 @@ void List<T>::add(T val) throw (OutOfMemory) {
   //Verificar que la lista no este vacia
   if (empty()){
     addFirst(val);
+    return;
   }
 
   //Crear nuevo nodo
@@ -200,7 +203,6 @@ std::string List<T>::toString() const {
 
 template <class T>
 List<T>::List(const List<T> &source) throw (OutOfMemory) {
-  /*
   head = NULL;
   size = 0;
   //Si la lista esta vacia
@@ -211,36 +213,11 @@ List<T>::List(const List<T> &source) throw (OutOfMemory) {
   //Recorrer la lista source
   Link<T> * actual = source.head;
 
-  while(actual != NULL){
+  while (actual != NULL){
     //Por cada nodo que se visita, crear un nuevo nodo al final
     add(actual->value);
     actual = actual->next;
   }
-  */
-  	Link<T> *p, *q;
-
-	if (source.empty()) {
-		size = 0;
-		head = 0;
-	} else {
-		p = source.head;
-		head = new Link<T>(p->value);
-		if (head == 0) {
-			throw OutOfMemory();
-		}
-		q = head;
-
-		p = p->next;
-		while(p != 0) {
-			q->next = new Link<T>(p->value);
-			if (q->next == 0) {
-				throw OutOfMemory();
-			}
-			p = p->next;
-			q = q->next;
-		}
-		size = source.size;
-	}
 }
 
 template <class T>
