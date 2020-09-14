@@ -119,7 +119,17 @@ bool List<T>::contains(T val) const {
 
 template <class T>
 T List<T>::getFirst() const throw (NoSuchElement) {
-	return 0;
+  if (empty()) {
+		throw NoSuchElement();
+	}
+  //Crear apuntador y dato
+  T valor;
+  Link<T> * actual = head;
+
+  //Apuntar al primer dato
+  valor = actual->value;
+
+	return valor;
 }
 
 template <class T>
