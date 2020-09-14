@@ -199,6 +199,7 @@ T List<T>::removeFirst() throw (NoSuchElement) {
   //Decrementar tamaño
   size--;
 
+  return valor;
 }
 
 template <class T>
