@@ -140,11 +140,17 @@ void List<T>::addFirst(T val) throw (OutOfMemory) {
 
 template <class T>
 void List<T>::add(T val) throw (OutOfMemory) {
+  //Verificar que la lista no este vacia
+  if (empty()){
+    addFirst(val);
+  }
+  
   //Crear nuevo nodo
   Link<T> * nuevo = new Link<T>(val);
   if (nuevo == NULL) {
 		throw OutOfMemory();
 	}
+
   // Crear apuntador actual
   Link<T> * actual = head;
 
