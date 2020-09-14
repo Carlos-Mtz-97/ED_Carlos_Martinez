@@ -204,7 +204,23 @@ T List<T>::removeFirst() throw (NoSuchElement) {
 
 template <class T>
 T List<T>::get(int index) const throw (IndexOutOfBounds, NoSuchElement) {
-	return 0;
+  
+  if (index < 0 || index >= size) {
+		throw IndexOutOfBounds();
+	}
+
+	if (index == 0) {
+		return getFirst();
+	}
+
+  int i = 0;
+  Link<T> * actual = head;
+  
+  while(i != index){
+    actual = actual->next;
+    i++;
+  }
+	return actual->value;
 }
 
 template <class T>
