@@ -114,6 +114,17 @@ int List<T>::length() const {
 
 template <class T>
 bool List<T>::contains(T val) const {
+  //Crear apuntador
+  Link<T> * actual = head;
+
+  //Recorrer lista
+  while (actual != NULL){
+    //Comprobar si esta el dato
+    if(actual->value == val){
+      return true;
+    }
+    actual = actual->next;
+  }
 	return false;
 }
 
