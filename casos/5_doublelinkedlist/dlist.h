@@ -31,13 +31,25 @@ private:
 };
 
 template <class T>
-DLink<T>::DLink(T val) {}
+DLink<T>::DLink(T val) {
+  value = val;
+  previous = NULL;
+  next = NULL;
+}
 
 template <class T>
-DLink<T>::DLink(T val, DLink *prev, DLink* nxt) {}
+DLink<T>::DLink(T val, DLink *prev, DLink* nxt) {
+  value = val;
+  previous = prev;
+  next = nxt;
+}
 
 template <class T>
-DLink<T>::DLink(const DLink<T> &source) {}
+DLink<T>::DLink(const DLink<T> &source) {
+  value = source.value;
+  previous = source.previous;
+  next = source.next;
+}
 
 template <class T>
 class DList {
@@ -80,7 +92,11 @@ private:
 };
 
 template <class T>
-DList<T>::DList() {}
+DList<T>::DList() {
+  head = NULL;
+  tail = NULL;
+  size = 0;
+}
 
 template <class T>
 DList<T>::~DList() {
