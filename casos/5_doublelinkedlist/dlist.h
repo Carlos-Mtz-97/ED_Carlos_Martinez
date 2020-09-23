@@ -101,11 +101,17 @@ DList<T>::DList() {
 template <class T>
 DList<T>::~DList() {
 	clear();
+  head = NULL;
+  tail = NULL;
+  size = 0;
 }
 
 template <class T>
 bool DList<T>::empty() const {
-	return 0;
+  if (head == NULL){
+    return true;
+  }
+	return false;
 }
 
 template <class T>
@@ -137,6 +143,33 @@ T DList<T>::getFirst() const throw (NoSuchElement) {
 
 template <class T>
 void DList<T>::addFirst(T val) throw (OutOfMemory) {
+  //Crear nodo
+  DLink<T> * nuevo_nodo = new DLink<T>(val);
+
+  //Verificar que haya memoria
+  if (nuevo_nodo == NULL){
+    throw OutOfMemory();
+  }
+
+  //Si esta vacia la lista 
+  if (empty()){
+    //head = nuevo
+    //tail = nuevo
+    head = nuevo_nodo;
+    tail = nuevo_nodo;
+  }
+    
+  //Si la lista no esta vacia
+  else{
+    //Apuntar nuevo -> next = head
+    nuevo_nodo->next = head;
+    //head -> previous = nuevo
+    head->previous = nuevo_nodo;
+    //head = nuevo
+    head = nuevo_nodo;
+  }
+  //Aumentar el tamaño
+  size++;
 }
 
 template <class T>
