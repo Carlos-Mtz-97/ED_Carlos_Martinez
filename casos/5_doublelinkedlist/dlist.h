@@ -174,6 +174,29 @@ void DList<T>::addFirst(T val) throw (OutOfMemory) {
 
 template <class T>
 void DList<T>::add(T val) throw (OutOfMemory) {
+  //Si esta vacia la lista 
+  if (empty()){
+    addFirst(val);
+    return;
+  }
+
+  //Crear nodo
+  DLink<T> * nuevo_nodo = new DLink<T>(val);
+
+  //Verificar que haya memoria
+  if (nuevo_nodo == NULL){
+    throw OutOfMemory();
+  }
+
+  //Apuntar tail -> next = nuevo nodo
+  tail->next = nuevo_nodo;
+  //Apuntar nuevo-> prev = tail
+  nuevo_nodo->previous = tail;
+  //tail = nuevo
+  tail = nuevo_nodo;
+  
+  //incrementar tamaño
+  size++;
 }
 
 template <class T>
