@@ -201,6 +201,18 @@ void DList<T>::add(T val) throw (OutOfMemory) {
 
 template <class T>
 T DList<T>::removeFirst() throw (NoSuchElement) {
+  if (empty()){
+    throw NoSuchElement();
+  }
+
+  head = head->next;
+  head->previous->next = NULL;
+  T victim = head->previous->value;
+  delete head->previous;
+  head->previous = NULL;
+
+  size--;
+  return victim;
 }
 
 template <class T>
