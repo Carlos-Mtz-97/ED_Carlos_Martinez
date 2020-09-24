@@ -384,6 +384,18 @@ int DList<T>::indexOf(T val) const {
 
 template <class T>
 int DList<T>::lastIndexOf(T val) const {
+  int index = size -1;
+  DLink<T> *actual;
+
+  if(actual != NULL){
+    if(actual->value = val){
+      return index;
+    }
+
+    index--;
+    actual = actual->previous;
+  }
+  return 0;
 }
 
 template <class T>
