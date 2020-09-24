@@ -433,6 +433,22 @@ T DList<T>::remove(int index) throw (IndexOutOfBounds) {
 
 template <class T>
 bool DList<T>::removeFirstOcurrence(T val) {
+  DLink<T> * actual;
+  actual = head;
+
+  while(actual != NULL){
+    if(actual->value == val)
+    {
+        actual->previous->next = actual->next;
+        actual->next-previous = actual->previous;
+        delete actual;
+        size--;
+        return true;
+		  }
+        
+    actual = actual->next; 
+    }
+  }
 	return false;
 }
 
