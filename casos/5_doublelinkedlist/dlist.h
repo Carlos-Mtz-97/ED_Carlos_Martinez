@@ -31,13 +31,25 @@ private:
 };
 
 template <class T>
-DLink<T>::DLink(T val) {}
+DLink<T>::DLink(T val) {
+  value = val;
+  previous = NULL;
+  next = NULL;
+}
 
 template <class T>
-DLink<T>::DLink(T val, DLink *prev, DLink* nxt) {}
+DLink<T>::DLink(T val, DLink *prev, DLink* nxt) {
+  value = val;
+  previous = prev;
+  next = nxt;
+}
 
 template <class T>
-DLink<T>::DLink(const DLink<T> &source) {}
+DLink<T>::DLink(const DLink<T> &source) {
+  value = source.value;
+  previous = source.previous;
+  next = source.next;
+}
 
 template <class T>
 class DList {
@@ -80,16 +92,26 @@ private:
 };
 
 template <class T>
-DList<T>::DList() {}
+DList<T>::DList() {
+  head = NULL;
+  tail = NULL;
+  size = 0;
+}
 
 template <class T>
 DList<T>::~DList() {
 	clear();
+  head = NULL;
+  tail = NULL;
+  size = 0;
 }
 
 template <class T>
 bool DList<T>::empty() const {
-	return 0;
+  if (head == NULL){
+    return true;
+  }
+	return false;
 }
 
 template <class T>
@@ -121,14 +143,76 @@ T DList<T>::getFirst() const throw (NoSuchElement) {
 
 template <class T>
 void DList<T>::addFirst(T val) throw (OutOfMemory) {
+  //Crear nodo
+  DLink<T> * nuevo_nodo = new DLink<T>(val);
+
+  //Verificar que haya memoria
+  if (nuevo_nodo == NULL){
+    throw OutOfMemory();
+  }
+
+  //Si esta vacia la lista 
+  if (empty()){
+    //head = nuevo
+    //tail = nuevo
+    head = nuevo_nodo;
+    tail = nuevo_nodo;
+  }
+    
+  //Si la lista no esta vacia
+  else{
+    //Apuntar nuevo -> next = head
+    nuevo_nodo->next = head;
+    //head -> previous = nuevo
+    head->previous = nuevo_nodo;
+    //head = nuevo
+    head = nuevo_nodo;
+  }
+  //Aumentar el tamaño
+  size++;
 }
 
 template <class T>
 void DList<T>::add(T val) throw (OutOfMemory) {
+  //Si esta vacia la lista 
+  if (empty()){
+    addFirst(val);
+    return;
+  }
+
+  //Crear nodo
+  DLink<T> * nuevo_nodo = new DLink<T>(val);
+
+  //Verificar que haya memoria
+  if (nuevo_nodo == NULL){
+    throw OutOfMemory();
+  }
+
+  //Apuntar tail -> next = nuevo nodo
+  tail->next = nuevo_nodo;
+  //Apuntar nuevo-> prev = tail
+  nuevo_nodo->previous = tail;
+  //tail = nuevo
+  tail = nuevo_nodo;
+  
+  //incrementar tamaño
+  size++;
 }
 
 template <class T>
 T DList<T>::removeFirst() throw (NoSuchElement) {
+  if (empty()){
+    throw NoSuchElement();
+  }
+
+  head = head->next;
+  head->previous->next = NULL;
+  T victim = head->previous->value;
+  delete head->previous;
+  head->previous = NULL;
+
+  size--;
+  return victim;
 }
 
 template <class T>
@@ -300,6 +384,18 @@ int DList<T>::indexOf(T val) const {
 
 template <class T>
 int DList<T>::lastIndexOf(T val) const {
+  int index = size -1;
+  DLink<T> *actual;
+
+  if(actual != NULL){
+    if(actual->value = val){
+      return index;
+    }
+
+    index--;
+    actual = actual->previous;
+  }
+  return 0;
 }
 
 template <class T>
@@ -337,11 +433,50 @@ T DList<T>::remove(int index) throw (IndexOutOfBounds) {
 
 template <class T>
 bool DList<T>::removeFirstOcurrence(T val) {
+  DLink<T> * actual;
+  actual = head;
+
+  while(actual != NULL){
+    if(actual->value == val){  
+      if (actual->previous == 0) {
+  			head = actual->next;
+	  		actual->next->previous = 0;
+		  } else {
+			  actual->previous->next = actual->next;
+			  if (actual->next != NULL) {
+				  actual->next->previous = actual->previous;
+			  }
+		  }
+        size--;
+        return true;
+		}
+    actual = actual->next; 
+  }
 	return false;
 }
 
 template <class T>
 bool DList<T>::removeLastOcurrence(T val) {
+    DLink<T> * actual;
+    actual = tail;
+
+  while(actual != NULL){
+    if(actual->value == val){
+        if (actual->previous == 0) {
+  			head = actual->next;
+	  		actual->next->previous = 0;
+		  } else {
+			  actual->previous->next = actual->next;
+			  if (actual->next != NULL) {
+				  actual->next->previous = actual->previous;
+			  }
+		  }
+        size--;
+        return true;
+		}
+        
+    actual = actual->previous; 
+  }
 	return false;
 }
 
