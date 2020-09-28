@@ -208,7 +208,7 @@ int bs_seq(int arr[], int size, int val) {
 }
 
 int bs_aux(int arr[], int low, int high, int val) {
-	if(low < high){
+	if(low > high){
     return low;
   }
 
@@ -223,7 +223,6 @@ int bs_aux(int arr[], int low, int high, int val) {
   } else { 
     return bs_aux(arr, mid + 1, high, val);
   }
-  return 0;
 }
 
 int bs_rec(int arr[], int size, int val) {
