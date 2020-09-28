@@ -118,11 +118,27 @@ bool find_rec(int arr[], int low, int high, int val) {
 }
 
 int max_seq(int arr[], int size) {
-	return 0;
+  int max = 0;
+  max =  arr[0];
+  for (int i = 1; i < size; i++){
+    if(max < arr[i]){
+      max = arr[i];
+    }
+  }
+	return max;
 }
 
 int max_rec(int arr[], int low, int high) {
-	return 0;
+  int mid, left, right;
+
+	if ( ((high - low) + 1) == 1) {
+		return arr[low];
+	} else {
+		mid = (high + low) / 2;
+		left = max_rec(arr, low, mid);
+		right = max_rec(arr, mid + 1, high);
+		return ( (left > right)? left : right );
+	}
 }
 
 int unimodal_seq(int arr[], int size) {
