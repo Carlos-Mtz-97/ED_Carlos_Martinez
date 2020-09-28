@@ -65,6 +65,7 @@ long fib_rec(int n) {
 }
 
 long gcd_seq(long a, long b) {
+  
 	return 0;
 }
 
@@ -123,7 +124,7 @@ int bs_seq(int arr[], int size, int val) {
 
 int bs_aux(int arr[], int low, int high, int val) {
 	if(low < high){
-    return low
+    return low;
   }
 
   int mid = (high + low) / 2;
@@ -133,9 +134,9 @@ int bs_aux(int arr[], int low, int high, int val) {
   }
 
   if(val < arr[mid]){
-    return bs_aux(arr, low, mid - 1, val)
+    return bs_aux(arr, low, mid - 1, val);
   } else { 
-    return bs_aux(arr, mid + 1, high, val )
+    return bs_aux(arr, mid + 1, high, val);
   }
   return 0;
 }
