@@ -92,11 +92,29 @@ long gcd_rec(long a, long b) {
 }
 
 bool find_seq(int arr[], int size, int val) {
+  for (int i = 0; i < size; i++){
+    if (val == arr[i]){
+      return true;
+    }
+  }
 	return false;
 }
 
 bool find_rec(int arr[], int low, int high, int val) {
-	return false;
+  int mid;
+	bool aux;
+
+	if ( ((high - low) + 1) == 1) {
+		return (val == arr[low]);
+	} else {
+		aux = false;
+		mid = (high + low) / 2;
+		aux = find_rec(arr, low, mid, val);
+		if (!aux) {
+			aux = find_rec(arr, mid + 1, high, val);
+		}
+		return aux;
+	}
 }
 
 int max_seq(int arr[], int size) {
