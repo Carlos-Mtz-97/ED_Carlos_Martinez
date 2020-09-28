@@ -30,11 +30,18 @@ long sum_rec(int n) {
 }
 
 long fact_seq(int n) {
-	return 0;
+  long resultado = 1;
+  for(int i = 1; i <= n; i++){
+    resultado = resultado * i; 
+  }
+	return resultado;
 }
 
 long fact_rec(int n) {
-	return 0;
+  if (n == 0){
+    return 1;
+  }
+	return n * fact_rec(n - 1);
 }
 
 long fib_seq(int n) {
