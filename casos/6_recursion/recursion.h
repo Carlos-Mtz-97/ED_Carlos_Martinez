@@ -65,12 +65,30 @@ long fib_rec(int n) {
 }
 
 long gcd_seq(long a, long b) {
-  
-	return 0;
+  while (a != b){ 
+      if (a > b){
+        a = a - b;
+      } else {
+        b = b - a;
+      }
+  }
+    return a;
 }
 
 long gcd_rec(long a, long b) {
-	return 0;
+  if (a == 0){
+    return b;
+  }
+  if (b == 0){
+    return a;
+  }
+  if (a == b){
+    return a;
+  }
+  if (a > b){
+    return gcd_rec(a - b, b);
+  }
+  return gcd_rec(a, b - a);
 }
 
 bool find_seq(int arr[], int size, int val) {
