@@ -45,11 +45,23 @@ long fact_rec(int n) {
 }
 
 long fib_seq(int n) {
-	return 0;
+  long resultado = 1;
+  long anterior_1 = resultado;
+  long anterior_2 = resultado;
+  
+  for (int i = 3; i <= n; i++){
+    resultado = anterior_1 + anterior_2;
+    anterior_2 = anterior_1;
+    anterior_1 = resultado;
+  }
+	return resultado;
 }
 
 long fib_rec(int n) {
-	return 0;
+  if (n == 1 || n == 2){
+    return 1;
+  }
+	return fib_rec(n - 1) + fib_rec(n - 2);
 }
 
 long gcd_seq(long a, long b) {
