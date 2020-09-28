@@ -101,14 +101,46 @@ int unimodal_rec(int arr[], int size) {
 }
 
 int bs_seq(int arr[], int size, int val) {
-	return 0;
+  int low = 0;
+  int high = size - 1;
+  int mid = (high + low) / 2;
+
+  while (low < high){
+    mid = (high + low) / 2;
+    if (val == arr[mid]){
+      return mid;
+    }
+
+    if(val < arr[mid]){
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+
+  }
+	return low;
 }
 
 int bs_aux(int arr[], int low, int high, int val) {
-	return 0;
+	if(low < high){
+    return low
+  }
+
+  int mid = (high + low) / 2;
+  
+  if(val == arr[mid]){
+    return mid;
+  }
+
+  if(val < arr[mid]){
+    return bs_aux(arr, low, mid - 1, val)
+  } else { 
+    return bs_aux(arr, mid + 1, high, val )
+  }
+  return 0;
 }
 
 int bs_rec(int arr[], int size, int val) {
-	return 0;
+	return bs_aux(arr,0, size -1,val);
 }
 #endif /* RECURSION_H_ */
