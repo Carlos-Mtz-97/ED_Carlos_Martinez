@@ -142,15 +142,48 @@ int max_rec(int arr[], int low, int high) {
 }
 
 int unimodal_seq(int arr[], int size) {
-	return 0;
+	if (size < 3) {
+		return -1;
+	}
+
+	int mid;
+	int low = 0;
+	int high = size - 1;
+	while (low < high) {
+		mid = (high + low) / 2;
+		if (arr[mid - 1] < arr[mid] && arr[mid] > arr[mid + 1]) {
+			return mid;
+		} else if (arr[mid - 1] < arr[mid] && arr[mid] < arr[mid + 1]) {
+			low = mid + 1;
+		} else if (arr[mid - 1] > arr[mid] && arr[mid] > arr[mid + 1]) {
+			high = mid - 1;
+		}
+	}
+	return low;
 }
 
 int unimodal_rec(int arr[], int low, int high) {
-	return 0;
+	int mid;
+
+	if (low <= high) {
+		mid = (high + low) / 2;
+		if (arr[mid - 1] < arr[mid] && arr[mid] > arr[mid + 1]) {
+			return mid;
+		} else if (arr[mid - 1] < arr[mid] && arr[mid] < arr[mid + 1]) {
+			return unimodal_rec(arr, mid + 1, high);
+		} else if (arr[mid - 1] > arr[mid] && arr[mid] > arr[mid + 1]) {
+			return unimodal_rec(arr, low, mid - 1);
+		}
+	}
+	return -1;
 }
 
 int unimodal_rec(int arr[], int size) {
-	return 0;
+	if (size < 3) {
+		return -1;
+	}
+
+	return unimodal_rec(arr, 0, size - 1);
 }
 
 int bs_seq(int arr[], int size, int val) {
