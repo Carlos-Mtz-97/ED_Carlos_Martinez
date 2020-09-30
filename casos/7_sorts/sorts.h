@@ -40,6 +40,14 @@ void Sorts<T>::swap(std::vector<T> &v, int i, int j) {
 template <class T>
 std::vector<T> Sorts<T>::bubbleSort(const std::vector<T> &source) {
 	std::vector<T> v(source);
+  for (int i = v.size() - 1; i > 0; i--) {
+		for (int j = 0; j < i; j++) {
+			if (v[j] > v[j + 1]) {
+				swap(v, j, j + 1);
+			}
+		}
+	}
+	return v;
 }
 
 template <class T>
