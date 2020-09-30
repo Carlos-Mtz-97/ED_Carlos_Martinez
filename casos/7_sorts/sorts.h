@@ -72,6 +72,13 @@ std::vector<T> Sorts<T>::selectionSort(const std::vector<T> &source) {
 template <class T>
 std::vector<T> Sorts<T>::insertionSort(const std::vector<T> &source) {
 	std::vector<T> v(source);
+  for (unsigned int i = 1; i < v.size(); i++){
+    for(unsigned int j = i; j > 0; j--){
+      if(v[j] < v[j - 1]){
+        swap(v,j, j -1);
+      }
+    }
+  }
 	return v;
 }
 
