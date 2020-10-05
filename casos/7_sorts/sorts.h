@@ -85,6 +85,16 @@ std::vector<T> Sorts<T>::insertionSort(const std::vector<T> &source) {
 template <class T>
 std::vector<T> Sorts<T>::shellSort(const std::vector<T> &source) {
 	std::vector<T> v(source);
+  int gap = v.size() / 2;
+  
+  for (gap; gap >= 1; gap /= 2){
+    for(int i = gap; i < v.size(); i++){
+     for (int j = i; j >= gap && v[j] < v[j - gap]; j -= gap) {
+				swap(v, j, j - gap);
+			}
+    }
+  }
+
 	return v;
 }
 
