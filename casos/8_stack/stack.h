@@ -84,6 +84,7 @@ bool StackVector<T>::empty() const {
 
 template <class T>
 void StackVector<T>::clear() {
+  next = 0;
 }
 
 template <class T>
@@ -130,6 +131,9 @@ void StackList<T>::pop() throw (NoSuchElement) {
 
 template <class T>
 bool StackList<T>::empty() const {
+  if (data.empty()){
+    return true;
+  }
 	return false;
 }
 
