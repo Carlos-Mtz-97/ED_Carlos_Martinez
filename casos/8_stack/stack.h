@@ -60,11 +60,18 @@ void StackVector<T>::push(T val) throw (Overflow) {
 
 template <class T>
 T StackVector<T>::top() const throw (NoSuchElement) {
-	return 0;
+  if(empty()){
+    throw NoSuchElement();
+  }
+  return data[next - 1];
 }
 
 template <class T>
 void StackVector<T>::pop() throw (NoSuchElement) {
+  if(empty()){
+    throw NoSuchElement();
+  }
+  next--;
 }
 
 template <class T>
