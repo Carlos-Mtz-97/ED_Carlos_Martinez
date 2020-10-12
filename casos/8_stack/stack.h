@@ -37,6 +37,11 @@ public:
 
 template <class T>
 StackVector<T>::StackVector(unsigned int sze) throw (OutOfMemory) {
+  next = 0;
+  size = sze;
+	data = new T[size];
+	if(data == 0)
+		throw OutOfMemory();
 }
 
 template <class T>
@@ -45,24 +50,41 @@ StackVector<T>::~StackVector() {
 
 template <class T>
 void StackVector<T>::push(T val) throw (Overflow) {
+  if (next == size){
+    throw Overflow();
+  }
+
+  data[next] = val;
+  next++;
 }
 
 template <class T>
 T StackVector<T>::top() const throw (NoSuchElement) {
-	return 0;
+  if(empty()){
+    throw NoSuchElement();
+  }
+  return data[next - 1];
 }
 
 template <class T>
 void StackVector<T>::pop() throw (NoSuchElement) {
+  if(empty()){
+    throw NoSuchElement();
+  }
+  next--;
 }
 
 template <class T>
 bool StackVector<T>::empty() const {
+  if (next == 0){
+    return true;
+  }
 	return false;
 }
 
 template <class T>
 void StackVector<T>::clear() {
+  next = 0;
 }
 
 template <class T>
@@ -96,24 +118,36 @@ public:
 
 template <class T>
 void StackList<T>::push(T val) {
+  data.push_front(val);
 }
 
 template <class T>
 T StackList<T>::top() const throw (NoSuchElement) {
-	return 0;
+  if(empty()){
+    throw NoSuchElement();
+  }
+  return data.front();
 }
 
 template <class T>
 void StackList<T>::pop() throw (NoSuchElement) {
+   if(empty()){
+    throw NoSuchElement();
+  }
+  data.pop_front();
 }
 
 template <class T>
 bool StackList<T>::empty() const {
+  if (data.empty()){
+    return true;
+  }
 	return false;
 }
 
 template <class T>
 void StackList<T>::clear() {
+  data.clear();
 }
 
 template <class T>
