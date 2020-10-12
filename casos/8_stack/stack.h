@@ -37,6 +37,11 @@ public:
 
 template <class T>
 StackVector<T>::StackVector(unsigned int sze) throw (OutOfMemory) {
+  next = 0;
+  size = sze;
+	data = new T[size];
+	if(data == 0)
+		throw OutOfMemory();
 }
 
 template <class T>
@@ -58,6 +63,9 @@ void StackVector<T>::pop() throw (NoSuchElement) {
 
 template <class T>
 bool StackVector<T>::empty() const {
+  if (next == 0){
+    return true;
+  }
 	return false;
 }
 
