@@ -113,11 +113,32 @@ void TreeNode::inorder(std::stringstream &aux) const {
 }
 
 void TreeNode::postorder(std::stringstream &aux) const {
-	aux << " ";
+	//recorrido in order rama izquierdo
+  if(left != NULL){
+    left -> postorder(aux);
+  }
+
+  //recorrido in order rama derecha
+  if(right != NULL){
+    right -> postorder(aux);
+  }
+
+  //Imprimir valor del nodo
+  aux << value<<  " ";
 }
 
 void TreeNode::preorder(std::stringstream &aux) const {
-	aux << " ";
+	aux << value<<  " ";
+
+  //recorrido in order rama izquierdo
+  if(left != NULL){
+    left -> preorder(aux);
+  }
+
+  //recorrido in order rama derecha
+  if(right != NULL){
+    right -> preorder(aux);
+  }
 }
 
 int TreeNode::howManyLeaves() const {
@@ -254,13 +275,13 @@ std::string EvalTree::inorder() const {
 
 std::string EvalTree::preorder() const {
 	std::stringstream aux;
-
+  root->preorder(aux);
 	return aux.str();
 }
 
 std::string EvalTree::postorder() const {
 	std::stringstream aux;
-
+  root->postorder(aux);
 	return aux.str();
 }
 
