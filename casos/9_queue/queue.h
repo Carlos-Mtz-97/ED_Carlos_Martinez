@@ -45,7 +45,14 @@ public:
 
 template <class T>
 QueueVector<T>::QueueVector(int sze) throw (OutOfMemory) {
-
+size = sze;
+data = new T[size]; 
+if (data == 0){
+  throw OutOfMemory();
+}
+head = 0;
+tail = 0;
+counter = 0;
 }
 
 template <class T>
