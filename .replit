@@ -1,2 +1,2 @@
 language = "cpp"
-run = "g++ casos/9_queue/main.cpp; ./a.out"
+run = "g++ casos/A_evaltree/main.cpp; ./a.out"

@@ -45,28 +45,71 @@ public:
 	friend class EvalTree;
 };
 
-TreeNode::TreeNode(char c) {}
+TreeNode::TreeNode(char c) {
+  value = c;
+  left = NULL;
+  right = NULL;
+}
 
-TreeNode::TreeNode(char c, TreeNode* le, TreeNode* ri) {}
+TreeNode::TreeNode(char c, TreeNode* le, TreeNode* ri) {
+  value = c;
+  left = le;
+  right = ri;
+}
 
 bool TreeNode::isOperator() const {
+  if (value == '+' || value == '-' || value == '*' || value == '/'){
+    return true;
+  }
 	return false;
 }
 
 bool TreeNode::isVariable() const {
+  if (value == 'x'){
+    return true;
+  }
 	return false;
 }
 
 bool TreeNode::isOperand() const {
+  if(value >= '0' && value <= '9'){
+    return true;
+  }
 	return false;
 }
 
 int TreeNode::depth() const {
-	return 0;
+  
+  //Encontrar la profundidad de la rama izquierda
+  int left_depth = -1;    
+  if (left != NULL){
+    left_depth = left->depth();
+  }
+  //Encontrar la profundidad de la rama derecha
+  int right_depth = -1;    
+  if (right != NULL){
+    right_depth = right->depth();
+  }
+  //Regresar la mayor de las 2 profundidades
+  int depth = left_depth;
+  if(right_depth > left_depth){
+    depth = right_depth;
+  }
+	return depth + 1;
 }
 
 void TreeNode::inorder(std::stringstream &aux) const {
-	aux << " ";
+  //recorrido in order rama izquierdo
+  if(left != NULL){
+    left -> inorder(aux);
+  }
+  //Imprimir valor del nodo
+  aux << value<<  " ";
+
+  //recorrido in order rama derecha
+  if(right != NULL){
+    right -> inorder(aux);
+  }
 }
 
 void TreeNode::postorder(std::stringstream &aux) const {
@@ -205,7 +248,7 @@ int EvalTree::height() const {
 
 std::string EvalTree::inorder() const {
 	std::stringstream aux;
-
+  root->inorder(aux);
 	return aux.str();
 }
 
