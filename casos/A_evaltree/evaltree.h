@@ -268,7 +268,10 @@ bool EvalTree::empty() const {
 }
 
 int EvalTree::height() const {
-	return 0;
+	if(empty()){
+    return 0;
+  }
+  return root->depth() + 1;
 }
 
 std::string EvalTree::inorder() const {
