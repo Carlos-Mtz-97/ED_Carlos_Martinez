@@ -287,6 +287,31 @@ std::string EvalTree::postorder() const {
 
 std::string EvalTree::levelOrder() const {
 	std::stringstream aux;
+  //Nevecitamos una fila para hacer el recorrido por niveles
+  std::queue<TreeNode*> q;
+
+  //Meter a la fila la raiz
+  TreeNode * node = root;
+  q.push(node);
+  //Mientras la fila no este vacia
+  while(!q.empty()){
+    //Imprimir el frente de la fila
+    node = q.front();
+    aux << node->value << " ";
+    
+    //Sacar el elemento de la fila
+    q.pop();
+    
+    //Si tiene hijo izquierdo, meter el hijo izq a la fila
+    if(node->left != 0){
+      q.push(node->left);
+    }
+
+    //Si tiene hijo derecho, meter el hijo der a la fila
+    if(node->right != 0){
+      q.push(node->right);
+    }
+  }
 
 	return aux.str();
 }
