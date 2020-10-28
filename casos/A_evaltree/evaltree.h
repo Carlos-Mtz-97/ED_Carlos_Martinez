@@ -261,6 +261,10 @@ EvalTree::~EvalTree() {
 }
 
 bool EvalTree::empty() const {
+  if(root == NULL){
+    return true;
+  }
+  return false;
 }
 
 int EvalTree::height() const {
