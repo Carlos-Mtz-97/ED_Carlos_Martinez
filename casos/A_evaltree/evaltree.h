@@ -142,15 +142,87 @@ void TreeNode::preorder(std::stringstream &aux) const {
 }
 
 int TreeNode::howManyLeaves() const {
-	return 0;
+  int left_count = 0;
+  int right_count = 0;
+  int total_count = 0;
+
+  //Recorrer el lado izquierdo
+  if(left!=0){
+    left_count = left->howManyLeaves();
+  }
+
+  //Recorrer el lado derecho
+  if(right!=0){
+     right_count = right->howManyLeaves();
+  }
+
+  //Sumar hojas del lado derecho e izquierdp
+  total_count = left_count + right_count;
+
+  //Imprimir cuenta total
+  if( total_count == 0){
+    return 1;
+  }
+	return total_count;
 }
 
 char TreeNode::minValue() const {
-	return '9';
+
+  int left_min = '9';
+  int right_min = '9';
+  int min = '9';
+
+  if(isOperand()){
+    min = value;
+  }
+  else if (isOperator()){
+    //Recorrer el lado izquierdo
+    if(left!=0){
+      left_min = left->minValue();
+    }
+
+    //Recorrer el lado derecho
+    if(right!=0){
+      right_min = right->minValue();
+    }
+
+    //Comparar los minimos 
+    if(left_min < right_min){
+      min = left_min;
+    }
+    else{
+      min = right_min;
+    }
+  }
+  return min;  
+  
 }
 
-bool TreeNode::find(char val) const {
-	return false;
+bool TreeNode::find(char val) const { 
+  bool found = false;
+  if (value == val){
+    return true;
+  }
+  //Recorrer el lado izquierdo
+  if(left != 0){
+    //verificar numero
+    if(found || left->find(val)){
+      found = true;
+    } else {
+      found = false;
+    }
+  }
+
+  //Recorrer el lado derecho
+  if(right != 0){
+    //Verificar numero
+    if(found || right->find(val)){
+      found = true;
+    } else {
+      found = false;
+    }
+  }
+  return found;
 }
 
 double TreeNode::eval(double x) const {
@@ -324,15 +396,21 @@ std::string EvalTree::levelOrder() const {
 }
 
 int EvalTree::howManyLeaves() const {
-	return 0;
+  if(empty()) {
+    return 0;
+  }
+	return root->howManyLeaves();
 }
 
 char EvalTree::minValue() const throw (IllegalAction) {
-	return '9';
+	if(empty()){
+     throw IllegalAction();
+  }
+  return root->minValue();
 }
 
 bool EvalTree::find(char c) const {
-	return false;
+	return root->find(c);
 }
 
 double EvalTree::eval(double x) const throw (IllegalAction) {
