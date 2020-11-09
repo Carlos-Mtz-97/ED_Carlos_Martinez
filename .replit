@@ -1,2 +1,3 @@
 language = "cpp"
 run = "g++ casos/B_bst/main.cpp; ./a.out"
+
