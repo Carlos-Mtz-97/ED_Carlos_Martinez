@@ -54,7 +54,20 @@ void TreeNode::removeChilds() {
 }
 
 bool TreeNode::isFull() const {
-	return false;
+	//Si está vacio
+  if(left == NULL && right == NULL){
+    return true;
+  }
+
+  //Si tiene hijo izquierdo y está lleno y tiene  hijo derecho u está lleno
+  // entonces está lleno
+  if(left != NULL && right != NULL
+    && left->isFull() && right->isFull() ){
+    return true;
+  }
+
+  //De lo contrario devolver falso
+  return false;
 }
 
 int TreeNode::internalNodes() const {
