@@ -126,7 +126,30 @@ bool TreeNode::isLeaf() const {
 
 
 bool TreeNode::isDegenerate() const {
-	return false;
+	if (isLeaf()) {
+		return false;
+	}
+	
+	if (left != NULL && right != NULL) {
+		return false;
+	}
+	
+	if (left != 0) {
+		if (left->isLeaf()) {
+			return true;
+		} else {
+			return left->isDegenerate();
+		}
+	}
+	
+	if (right != 0) {
+		if (right->isLeaf()) {
+			return true;
+		} else {
+			return right->isDegenerate();
+		}
+	}
+	return true;
 }
 
 class SimpleTree {
