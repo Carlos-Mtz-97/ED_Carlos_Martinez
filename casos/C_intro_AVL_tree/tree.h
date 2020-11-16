@@ -71,7 +71,21 @@ bool TreeNode::isFull() const {
 }
 
 int TreeNode::internalNodes() const {
-	return 0;
+  //Si es hoja regresa 0
+  if(isLeaf()){
+    return 0;
+  }
+  int result = 1;
+  //Si tiene un hijo, regresa los nodos internos del hijo
+  if(left != NULL){
+    result = result + left->internalNodes();
+  }
+
+  if(right != NULL){
+    result = result + right->internalNodes();
+  }
+  
+	return result;
 }
 
 int TreeNode::depth() const {
