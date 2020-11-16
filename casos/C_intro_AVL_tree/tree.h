@@ -84,7 +84,6 @@ int TreeNode::internalNodes() const {
   if(right != NULL){
     result = result + right->internalNodes();
   }
-  
 	return result;
 }
 
@@ -104,7 +103,21 @@ int TreeNode::depth() const {
 }
 
 bool TreeNode::isPerfect() const {
-	return false;		
+  int le, ri;
+	
+	//Si está vacio
+  if(left == NULL && right == NULL){
+    return true;
+  }
+	//Verificar que tenga ramas y obtener profuncidad de cada rama
+	if (left != NULL && right != NULL) {
+		le = left->depth();
+		ri = right->depth();
+		if (le == ri){
+      return true;
+    }
+	}	
+  return false;
 }
 
 bool TreeNode::isLeaf() const {
