@@ -91,11 +91,7 @@ long HashTable<Key, Value>::indexOf(const Key k) const {
 
 template <class Key, class Value>
 bool HashTable<Key, Value>::put(Key k, Value v) throw (Overflow) {
-  //Si la tabla esta llena, lanzar excepcion
-  if(full()){
-    throw Overflow();
-  }
-
+  
   //Obtener la posicion en la tabla de la llave k
   int posicion_tabla = indexOf(k);
   // Si la llave ya tiene un indice, actualizar su valor y devolver
@@ -103,6 +99,10 @@ bool HashTable<Key, Value>::put(Key k, Value v) throw (Overflow) {
   if(posicion_tabla != -1){
     values[posicion_tabla] = v;
     return true;
+  }
+  //Si la tabla esta llena, lanzar excepcion
+  if(full()){
+    throw Overflow();
   }
   //So la llave no tiene in indice, calcular su indice con la funcion de
   //hash, si está disponible insertar la llavem el valor, aumentar el 
