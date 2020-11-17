@@ -38,7 +38,29 @@ public:
 
 template <class Key, class Value>
 HashTable<Key, Value>::HashTable(unsigned int sze, Key init, unsigned int (*f) (const Key)) throw (OutOfMemory) {
-	
+  //Inicializar variables con parametros
+  size = sze;
+  initialValue = init;
+  //Asignar la funcion de hash al apuntador func
+  func = f;
+
+  //Asegurarse que hay memoria disponible
+  keys = new Key[size];
+  if(keys == NULL){
+    throw OutOfMemory();
+  }
+
+  values = new Value[size];
+  if(values == NULL){
+    throw OutOfMemory();
+  }
+
+  //Asignar llave a su valor inicial
+  for (int i = 0; i < size; i++){
+    keys[i] = init;
+  }
+
+  count = 0;
 }
 
 template <class Key, class Value>
@@ -48,17 +70,61 @@ HashTable<Key, Value>::~HashTable() {
 
 template <class Key, class Value>
 bool HashTable<Key, Value>::full() const {
-	return false;
+	if(count == size){
+    return true;
+  }
+  return false;
 }
 
 template <class Key, class Value>
 long HashTable<Key, Value>::indexOf(const Key k) const {
-	return -1;
+	int inicio_busqueda = func(k) % size;
+  int i = inicio_busqueda;
+  do {
+    if(keys[i] == k){
+      return i;
+    }
+    i = (i + 1) % size;
+  } while (i != inicio_busqueda);
+  return -1;
 }
 
 template <class Key, class Value>
 bool HashTable<Key, Value>::put(Key k, Value v) throw (Overflow) {
-	return false;
+  //Si la tabla esta llena, lanzar excepcion
+  if(full()){
+    throw Overflow();
+  }
+
+  //Obtener la posicion en la tabla de la llave k
+  int posicion_tabla = indexOf(k);
+  // Si la llave ya tiene un indice, actualizar su valor y devolver
+  //verdadero
+  if(posicion_tabla != -1){
+    values[posicion_tabla] = v;
+    return true;
+  }
+  //So la llave no tiene in indice, calcular su indice con la funcion de
+  //hash, si está disponible insertar la llavem el valor, aumentar el 
+  //Contador y devolver verdadero. si no esta disponible biscar un lugar
+  //disponible
+  //Obtener el valor de hash
+  int valor_hash = func(k) % size;
+  int i = valor_hash;
+
+  //Inseta la llave y el valor en la posicion de la tabla de hash
+  //pero si esta ocupado , busca un ligar por sondeo lineal
+  do {
+    if(keys[i] == initialValue){
+      keys[i] = k;
+      values[i] = v;
+      count++;
+      return true;
+    } 
+    i = (i + 1) % size;
+  } while (i != valor_hash);
+  return false;
+
 }
 
 template <class Key, class Value>
